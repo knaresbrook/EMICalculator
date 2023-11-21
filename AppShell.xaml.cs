@@ -8,6 +8,7 @@ namespace EMICalculator
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(LoanAmorPage), typeof(LoanAmorPage));
+            Routing.RegisterRoute(nameof(HomeLoanPage), typeof(HomeLoanPage));
         }
     }
 }

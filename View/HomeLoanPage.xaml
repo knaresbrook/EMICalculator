@@ -10,12 +10,39 @@
     xmlns:viewmodel="clr-namespace:EMICalculator.ViewModel"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:Name="this"
+    Title="Home Loan"
     BackgroundColor="White">
-
 
     <ContentPage.BindingContext>
         <viewmodel:HomeLoanViewModel />
     </ContentPage.BindingContext>
+
+
+    <Shell.TitleView>
+        <Grid>
+            <Label
+                BackgroundColor="DarkOrange"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Start"
+                Text="Home Loan"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+            <Button
+                Margin="0,5,5,5"
+                BackgroundColor="LightGreen"
+                Command="{Binding NavigateCommand}"
+                FontAttributes="Bold"
+                FontSize="16"
+                HorizontalOptions="End"
+                IsVisible="{Binding ILoanSchShow}"
+                Text="Loan Schedule"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+        </Grid>
+    </Shell.TitleView>
 
     <StackLayout x:Name="HomeLoanPages">
         <Frame
@@ -39,11 +66,11 @@
                         TextColor="Navy" />
                     <Entry
                         x:Name="txtLoanAmount"
+                        BackgroundColor="#ececec"
                         MinimumHeightRequest="48"
                         Placeholder="Loan Amount"
                         Style="{StaticResource entryStyle}"
                         Text="{Binding LoanAmount, StringFormat='{}{0:#,##0}'}"
-                        BackgroundColor="#ececec"
                         TextColor="#787878" />
 
                 </HorizontalStackLayout>
@@ -231,7 +258,7 @@
             WidthRequest="50"
             Color="OrangeRed" />
 
-        <Button
+        <!--<Button
             Margin="0,10,0,0"
             BackgroundColor="DarkOrange"
             Command="{Binding NavigateCommand}"
@@ -242,7 +269,7 @@
             MinimumHeightRequest="48"
             Text="View Loan Amortization"
             TextColor="Black"
-            WidthRequest="250" />
+            WidthRequest="250" />-->
 
 
     </StackLayout>

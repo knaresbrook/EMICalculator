@@ -34,6 +34,7 @@ namespace EMICalculator.ViewModel
             TotalAmountPayable = 0;
             IsRunning = false;
             PieChart = null;
+            ILoanSchShow = false;
         }
 
         [RelayCommand]
@@ -77,6 +78,9 @@ namespace EMICalculator.ViewModel
                 }
             }
         }
+
+        [RelayCommand]
+        Task NavigateHomeLoan() => Shell.Current.GoToAsync(nameof(HomeLoanPage));
 
 
         [RelayCommand]

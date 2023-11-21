@@ -1,13 +1,8 @@
 ﻿
-using MvvmHelpers;
-using System.Windows.Input;
 using EMICalculator.Model;
 using Microcharts;
+using MvvmHelpers;
 using SkiaSharp.Views.Maui;
-using System;
-using System.Linq;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Graphics;
 
 
 namespace EMICalculator.ViewModel
@@ -54,6 +49,9 @@ namespace EMICalculator.ViewModel
         [ObservableProperty]
         public List<Loan> itemList = new();
 
+        [ObservableProperty]
+        private bool iLoanSchShow = false;
+        
         [ObservableProperty]
         private bool isReady = false;
 
@@ -193,6 +191,7 @@ namespace EMICalculator.ViewModel
                 Items.ReplaceRange(ItemList.Take(batchSize).ToList());
                 IsLoading = false;
                 IsReady = true;
+                ILoanSchShow = true;
             }
             catch (Exception ex)
             {

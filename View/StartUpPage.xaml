@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EMICalculator.View.StartUpPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:EMICalculator.ViewModel"
+    Title="EMI Calculator"
+    BackgroundColor="white">
+
+    <ContentPage.BindingContext>
+        <viewmodel:HomeLoanViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid VerticalOptions="Center">
+        <StackLayout>
+            <Image
+                Margin="0,0,0,10"
+                HeightRequest="150"
+                Source="applicationicon.PNG"
+                WidthRequest="150" />
+            <Button
+                x:Name="btnHomeLoan"
+                Margin="0,0,0,20"
+                BackgroundColor="DarkOrange"
+                Command="{Binding NavigateHomeLoanCommand}"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                ImageSource="homeloan.png"
+                Text="Home Loan"
+                TextColor="Black"
+                VerticalOptions="Center" />
+            <Button
+                x:Name="btnCarLoan"
+                Margin="0,0,0,20"
+                BackgroundColor="DarkOrange"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                ImageSource="carloan.png"
+                Text="Car Loan"
+                TextColor="Black"
+                VerticalOptions="Center" />
+            <Button
+                x:Name="btnPersonalLoan"
+                Margin="0,0,0,20"
+                BackgroundColor="DarkOrange"
+                FontAttributes="Bold"
+                FontSize="20"
+                HorizontalOptions="Center"
+                ImageSource="personalloan.png"
+                Text="Personal Loan"
+                TextColor="Black"
+                VerticalOptions="Center" />
+
+        </StackLayout>
+    </Grid>
+</ContentPage>

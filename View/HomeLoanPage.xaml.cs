@@ -1,20 +1,10 @@
+using CommunityToolkit.Maui.Views;
 using EMICalculator.ViewModel;
-using iTextSharp.text.pdf;
 using iTextSharp.text;
-using Image = iTextSharp.text.Image;
-using CommunityToolkit.Maui.Core.Platform;
-using Microcharts;
-using System.ComponentModel;
+using iTextSharp.text.pdf;
 using Color = iTextSharp.text.Color;
 using Font = iTextSharp.text.Font;
-using System.IO;
-using Microsoft.Maui.Storage;
-using Microsoft.Maui.Networking;
-using Microsoft.Maui.ApplicationModel.Communication;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui;
-using System;
-using CommunityToolkit.Maui.Views;
+using Image = iTextSharp.text.Image;
 
 namespace EMICalculator.View;
 public partial class HomeLoanPage : ContentPage
@@ -187,6 +177,7 @@ public partial class HomeLoanPage : ContentPage
         VM.TotalAmountPayable = 0;
         VM.IsRunning = false;
         VM.PieChart = null;
+        VM.ILoanSchShow = false;
         controlsCheck();
     }
 

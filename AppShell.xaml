@@ -10,7 +10,7 @@
     Shell.TabBarTitleColor="#2f2f2f"
     Shell.TitleColor="#3b3b3b">
 
-    <TabBar>
+    <!--<TabBar>
         <ShellContent
             Title="Home Loans"
             ContentTemplate="{DataTemplate views:HomeLoanPage}"
@@ -25,11 +25,11 @@
             Title="Personal Loans"
             ContentTemplate="{DataTemplate views:PersonalLoanPage}"
             Icon="personalloan.png" />
-    </TabBar>
+    </TabBar>-->
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:HomeLoanPage}"
-        Route="HomeLoanPage" />
+        Title="EMI Calculator"
+        ContentTemplate="{DataTemplate local:StartUpPage}"
+        Route="StartUpPage" />
 
 </Shell>
