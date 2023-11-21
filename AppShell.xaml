@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="EMICalculator.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:EMICalculator.View"
+    xmlns:views="clr-namespace:EMICalculator.View"
+    Shell.BackgroundColor="DarkOrange"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarTitleColor="#2f2f2f"
+    Shell.TitleColor="#3b3b3b">
+
+    <TabBar>
+        <ShellContent
+            Title="Home Loans"
+            ContentTemplate="{DataTemplate views:HomeLoanPage}"
+            Icon="homeloan.png" />
+
+        <ShellContent
+            Title="Car Loans"
+            ContentTemplate="{DataTemplate views:CarLoanPage}"
+            Icon="carloan.png" />
+
+        <ShellContent
+            Title="Personal Loans"
+            ContentTemplate="{DataTemplate views:PersonalLoanPage}"
+            Icon="personalloan.png" />
+    </TabBar>
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:HomeLoanPage}"
+        Route="HomeLoanPage" />
+
+</Shell>

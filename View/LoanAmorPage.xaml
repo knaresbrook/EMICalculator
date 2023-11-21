@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EMICalculator.View.LoanAmorPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:EMICalculator.Model"
+    xmlns:view="clr-namespace:EMICalculator.View"
+    xmlns:viewmodel="clr-namespace:EMICalculator.ViewModel"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="this"
+    Title="Loan Amortization Schedule">
+
+    <!--<ContentPage.BindingContext>
+     <viewmodel:HomeLoanViewModel />
+ </ContentPage.BindingContext>-->
+
+    <StackLayout CompressedLayout.IsHeadless="True">
+        <Label
+            Margin="0,10,0,0"
+            Style="{StaticResource labelStyle}"
+            Text="Loan Amortization Schedule"
+            WidthRequest="350" />
+        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Label
+                Margin="1,2,0,0"
+                Style="{StaticResource labelStyle}"
+                Text="Month"
+                WidthRequest="70" />
+
+            <Label
+                Margin="0,2,0,0"
+                Style="{StaticResource labelStyle}"
+                Text="P-Amt"
+                WidthRequest="70" />
+
+            <Label
+                Margin="0,2,0,0"
+                Style="{StaticResource labelStyle}"
+                Text="Int"
+                WidthRequest="65" />
+
+            <Label
+                Margin="0,2,0,0"
+                Style="{StaticResource labelStyle}"
+                Text="Paym"
+                WidthRequest="75" />
+
+            <Label
+                Margin="0,2,0,0"
+                Style="{StaticResource labelStyle}"
+                Text="Balance"
+                WidthRequest="70" />
+
+        </HorizontalStackLayout>
+        <CollectionView
+            Margin="0,10,0,0"
+            HeightRequest="590"
+            HorizontalOptions="Center"
+            ItemsSource="{Binding Items}"
+            RemainingItemsThreshold="1"
+            RemainingItemsThresholdReachedCommand="{Binding LoadMoreItemsCommand}"
+            VerticalOptions="Center"
+            WidthRequest="350">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Loan">
+                    <Border
+                        Background="Transparent"
+                        HorizontalOptions="Center"
+                        Stroke="YellowGreen"
+                        StrokeThickness="1">
+                        <HorizontalStackLayout Padding="0">
+                            <Label
+                                Margin="10,0,0,0"
+                                FontSize="13"
+                                Text="{Binding Month, Mode=OneTime}"
+                                WidthRequest="50" />
+                            <Label
+                                FontSize="13"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding Principal, Mode=OneTime}"
+                                WidthRequest="60" />
+                            <Label
+                                Margin="0,0,0,0"
+                                FontSize="13"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding Interest, Mode=OneTime}"
+                                WidthRequest="65" />
+                            <Label
+                                Margin="40,0,0,0"
+                                FontSize="13"
+                                Text="{Binding TotalPayment, Mode=OneTime}"
+                                WidthRequest="55" />
+                            <Label
+                                Margin="10,0,0,0"
+                                FontSize="13"
+                                Text="{Binding Balance, Mode=OneTime}"
+                                WidthRequest="50" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

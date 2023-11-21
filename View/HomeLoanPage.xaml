@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EMICalculator.View.HomeLoanPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+    xmlns:model="clr-namespace:EMICalculator.Model"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:v="clr-namespace:EMICalculator.View"
+    xmlns:viewmodel="clr-namespace:EMICalculator.ViewModel"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Name="this"
+    BackgroundColor="White">
+
+
+    <ContentPage.BindingContext>
+        <viewmodel:HomeLoanViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout x:Name="HomeLoanPages">
+        <Frame
+            Margin="10"
+            BorderColor="YellowGreen"
+            CornerRadius="5"
+            HeightRequest="230"
+            HorizontalOptions="Center"
+            IsClippedToBounds="True"
+            VerticalOptions="Center"
+            WidthRequest="350">
+
+            <StackLayout>
+                <HorizontalStackLayout>
+                    <Label
+                        Margin="5"
+                        Padding="0,10,17,0"
+                        FontSize="Medium"
+                        HorizontalOptions="Center"
+                        Text="Loan Amount ₹ :"
+                        TextColor="Navy" />
+                    <Entry
+                        x:Name="txtLoanAmount"
+                        MinimumHeightRequest="48"
+                        Placeholder="Loan Amount"
+                        Style="{StaticResource entryStyle}"
+                        Text="{Binding LoanAmount, StringFormat='{}{0:#,##0}'}"
+                        BackgroundColor="#ececec"
+                        TextColor="#787878" />
+
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label
+                        Padding="8,10,20,2"
+                        FontSize="Medium"
+                        HorizontalOptions="Center"
+                        Text="Interest Rate % :"
+                        TextColor="Navy"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="txtInterestRate"
+                        MinimumHeightRequest="48"
+                        Placeholder="Interest Rate"
+                        Style="{StaticResource entryStyle}"
+                        Text="{Binding InterestRate}" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label
+                        Margin="0,10"
+                        Padding="8,10,20,0"
+                        FontSize="Medium"
+                        HorizontalOptions="Center"
+                        Text="Tenure Yr/Mth :"
+                        TextColor="Navy"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="txtTenure"
+                        Margin="5,0,0,0"
+                        Completed="txtTenure_Completed"
+                        MaxLength="3"
+                        MinimumHeightRequest="48"
+                        MinimumWidthRequest="48"
+                        Placeholder="Enter Loan Tenure"
+                        Style="{StaticResource entryStyle}"
+                        Text="{Binding Tenure}">
+                        <Entry.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                Command="{Binding TenureChangedCommand}"
+                                CommandParameter="{Binding Source={Reference txtTenure}}"
+                                EventName="TextChanged" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout>
+                    <Label
+                        Margin="0,0"
+                        Padding="8,0,20,0"
+                        FontSize="Medium"
+                        HorizontalOptions="Center"
+                        Text="Tenure Type :"
+                        TextColor="Navy"
+                        VerticalOptions="Center" />
+
+                    <RadioButton
+                        x:Name="opt1"
+                        Margin="19,0,0,0"
+                        Content="Year"
+                        IsChecked="True"
+                        MinimumHeightRequest="48"
+                        MinimumWidthRequest="48"
+                        Value="Yr">
+                        <RadioButton.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                Command="{Binding RadioChangedCommand}"
+                                CommandParameter="{Binding Source={Reference opt1}}"
+                                EventName="CheckedChanged" />
+                        </RadioButton.Behaviors>
+                    </RadioButton>
+                    <RadioButton
+                        x:Name="opt2"
+                        Content="Month"
+                        MinimumHeightRequest="48"
+                        MinimumWidthRequest="48"
+                        Value="Mt">
+                        <RadioButton.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                Command="{Binding RadioChangedCommand}"
+                                CommandParameter="{Binding Source={Reference opt2}}"
+                                EventName="CheckedChanged" />
+                        </RadioButton.Behaviors>
+                    </RadioButton>
+
+                </HorizontalStackLayout>
+            </StackLayout>
+        </Frame>
+
+        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Button
+                x:Name="btnCalculate"
+                Margin="10,0,0,0"
+                Command="{Binding SaveCommand}"
+                MinimumHeightRequest="48"
+                Style="{StaticResource buttonStyle}"
+                Text="Calculate" />
+            <Button
+                x:Name="PrintToPdfBtn"
+                Margin="5,0,0,0"
+                Clicked="PrintToPdfBtn_Clicked"
+                IsEnabled="{Binding IsReady}"
+                MinimumHeightRequest="48"
+                Style="{StaticResource buttonStyle}"
+                Text="Email PDF" />
+            <Button
+                x:Name="btnClear"
+                Margin="5,0,0,0"
+                Clicked="btnClear_Clicked"
+                MinimumHeightRequest="48"
+                Style="{StaticResource buttonStyle}"
+                Text="Clear" />
+        </HorizontalStackLayout>
+
+        <Frame
+            x:Name="framesummary"
+            Margin="10"
+            BorderColor="YellowGreen"
+            CornerRadius="5"
+            HeightRequest="140"
+            HorizontalOptions="Center"
+            IsClippedToBounds="True"
+            IsVisible="{Binding IsShow}"
+            VerticalOptions="Center"
+            WidthRequest="350">
+            <StackLayout>
+                <HorizontalStackLayout Margin="1,0,0,0">
+                    <Label
+                        Style="{StaticResource labelSummaryStyle}"
+                        Text="Monthly EMI : ₹"
+                        TextColor="#b4600d" />
+                    <Label
+                        Style="{StaticResource labelSummaryStyle}"
+                        Text="{Binding MonthlyEMI, StringFormat='{}{0:#,##0.00}'}"
+                        TextColor="Black" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="1,10,0,0">
+                    <Label
+                        Style="{StaticResource labelSummaryStyle}"
+                        Text="Total Interest Payable : ₹"
+                        TextColor="#b4600d" />
+                    <Label
+                        Style="{StaticResource labelSummaryStyle}"
+                        Text="{Binding TotalInterestPayable, StringFormat='{}{0:#,##0.00}'}"
+                        TextColor="Black" />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Margin="1,10,0,0">
+                    <Label
+                        Style="{StaticResource labelSummaryStyle}"
+                        Text="Total Amount Payable : ₹"
+                        TextColor="#b4600d" />
+                    <Label
+                        Style="{StaticResource labelSummaryStyle}"
+                        Text="{Binding TotalAmountPayable, StringFormat='{}{0:#,##0.00}'}"
+                        TextColor="Black" />
+                </HorizontalStackLayout>
+            </StackLayout>
+        </Frame>
+        <Frame
+            x:Name="framegraph"
+            Margin="1"
+            BorderColor="YellowGreen"
+            CornerRadius="5"
+            HeightRequest="190"
+            HorizontalOptions="Center"
+            IsClippedToBounds="True"
+            IsVisible="{Binding IsShow}"
+            VerticalOptions="Center"
+            WidthRequest="350">
+            <HorizontalStackLayout>
+                <microcharts:ChartView
+                    x:Name="Chart"
+                    Chart="{Binding PieChart}"
+                    HeightRequest="160"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="StartAndExpand"
+                    WidthRequest="300" />
+            </HorizontalStackLayout>
+        </Frame>
+        <ActivityIndicator
+            x:Name="activity"
+            HeightRequest="50"
+            IsRunning="{Binding IsRunning}"
+            IsVisible="{Binding IsRunning}"
+            WidthRequest="50"
+            Color="OrangeRed" />
+
+        <Button
+            Margin="0,10,0,0"
+            BackgroundColor="DarkOrange"
+            Command="{Binding NavigateCommand}"
+            FontAttributes="Bold"
+            FontSize="Medium"
+            HorizontalOptions="CenterAndExpand"
+            IsVisible="{Binding IsShow}"
+            MinimumHeightRequest="48"
+            Text="View Loan Amortization"
+            TextColor="Black"
+            WidthRequest="250" />
+
+
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    x:Class="EMICalculator.View.PopupPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    CanBeDismissedByTappingOutsideOfPopup="false"
+    HorizontalOptions="Center"
+    Size="350,200"
+    VerticalOptions="Center"
+    Color="White">
+
+    <VerticalStackLayout>
+        <HorizontalStackLayout Margin="0,32,0,0">
+            <Label
+                Margin="20,0,0,0"
+                Padding="0,10,0,0"
+                FontSize="Medium"
+                Text="Email Address :"
+                TextColor="Navy" />
+            <Entry
+                x:Name="txtEmailAddress"
+                MinimumHeightRequest="48"
+                Placeholder="Email Address"
+                WidthRequest="175">
+                <Entry.Behaviors>
+                    <toolkit:EmailValidationBehavior
+                        Flags="ValidateOnValueChanged"
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}" />
+                </Entry.Behaviors>
+            </Entry>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout
+            Margin="0,30,0,0"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Button
+                BackgroundColor="DarkOrange"
+                Clicked="Button_Clicked_Yes"
+                Text="OK"
+                TextColor="black"
+                WidthRequest="80" />
+            <Button
+                Margin="9,0,0,0"
+                BackgroundColor="DarkOrange"
+                Clicked="Button_Clicked_No"
+                Text="Cancel"
+                TextColor="black"
+                WidthRequest="80" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+</toolkit:Popup>
